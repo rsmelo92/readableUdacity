@@ -3,11 +3,16 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Route } from 'react-router-dom';
 import '../App.css';
 import Header from './header';
-import PostItem from './postItem';
-
+import AllPosts from './allPosts';
+import { connect } from 'react-redux';
+import testAction from '../actions/index';
 
 
 class App extends Component {
+    componentDidMount(){
+        this.props.dispatch(testAction);
+    }
+
     render() {
         return (
             <MuiThemeProvider>
@@ -17,7 +22,7 @@ class App extends Component {
                     
                     <Route exact path="/" render={() => (
                         <section className="posts-holder">
-                            <PostItem className="post"></PostItem>
+                            <AllPosts></AllPosts>
                         </section>
                     )} />
                     
@@ -40,4 +45,8 @@ class App extends Component {
     }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+    testReducer: state.testReducer
+});
+
+export default connect(mapStateToProps)(App);

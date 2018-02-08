@@ -3,24 +3,26 @@ import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
 
-class PostItem extends Component{
+class PostItem extends Component{	
 	render(){
+		const post = this.props.post;
+		console.log("post: ",post);
 		return (
 			<Card className="post-card">
 				<CardHeader
-					title="Title"
-					subtitle="Author"
+					title={post.title}
+					subtitle={post.author}
 					actAsExpander={false}
 					showExpandableButton={true}
 				/>
 				<CardText>
 					<strong>
 					<div>
-						<span className="comments-number">13</span>
+						<span className="comments-number">{post.commentCount}</span>
 						<span> comments</span>
 					</div>
 					<div>
-						<span className="points-number">100</span>
+						<span className="points-number">{post.voteScore}</span>
 						<span> points</span>
 					</div>
 					</strong>
@@ -36,10 +38,7 @@ class PostItem extends Component{
 					<FlatButton className="vote-button" label="Delete"/>
 				</CardActions>
 				<CardText expandable={true}>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-					Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-					Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+					{post.body}
 				</CardText>
 			</Card>
 		)
