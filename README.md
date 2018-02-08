@@ -8,4 +8,5 @@ To get started developing right away:
     - `node server`
 * In another terminal window start the frontend
     - `cd frontend`
+    - `npm install`
     - `npm start`
