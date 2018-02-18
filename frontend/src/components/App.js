@@ -5,12 +5,12 @@ import '../App.css';
 import Header from './header';
 import AllPosts from './allPosts';
 import { connect } from 'react-redux';
-import testAction from '../actions/index';
+import { loadPosts } from '../actions/posts';
 
 
 class App extends Component {
     componentDidMount(){
-        this.props.dispatch(testAction);
+        // console.log(this.props.getAll())
     }
 
     render() {
@@ -45,8 +45,14 @@ class App extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    testReducer: state.testReducer
-});
+const mapStateToProps = (state) => (state);
 
-export default connect(mapStateToProps)(App);
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getAll: () => dispatch(loadPosts()),
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

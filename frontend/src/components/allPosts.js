@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 import PostItem from './postItem';
-import { api } from '../utils/api';
+import { connect } from 'react-redux';
+import { loadPosts } from '../actions/posts';
 
 class AllPosts extends Component{
 	componentDidMount(){
-		api.getAllPosts().then(res=>{
-			this.setState({
-							posts:res
-						  });
-		});
+		this.props.getAll();
 	}
 
 	render(){
-		const posts = this.state ? this.state.posts : [];
+        const posts = this.props.posts ? this.props.posts : [];
 		return (
 			<div>
 				{posts.map((item, index)=>(
@@ -28,4 +25,12 @@ class AllPosts extends Component{
 	}
 }
 
-export default AllPosts;
+const mapStateToProps = (state) => ({posts:state.postReducers.posts});
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getAll: () => dispatch(loadPosts()),
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(AllPosts);

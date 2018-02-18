@@ -4,6 +4,9 @@ import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
 
 class PostItem extends Component{	
+	handleVote = ()=>{
+		alert("Voted");
+	}
 	render(){
 		const post = this.props.post;
 		console.log("post: ",post);
@@ -28,10 +31,10 @@ class PostItem extends Component{
 					</strong>
 				</CardText>
 				<CardActions>
-					<FlatButton className="vote-button up" style={{padding:6}}>
+					<FlatButton className="vote-button up" style={{padding:6}} onClick={()=>this.handleVote()}>
 						<FontIcon className="material-icons" style={{color:'blue'}}>thumb_up</FontIcon>
 					</FlatButton>
-					<FlatButton className="vote-button down" style={{padding:6}}>
+					<FlatButton className="vote-button down" style={{padding:6}} onClick={()=>this.handleVote()}>
 						<FontIcon className="material-icons" style={{color:'blue'}}>thumb_down</FontIcon>
 					</FlatButton>
 					<FlatButton style={{padding:6}} className="vote-button" label="Edit"/>
