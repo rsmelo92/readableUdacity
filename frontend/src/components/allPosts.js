@@ -25,12 +25,14 @@ class AllPosts extends Component{
 	}
 }
 
-const mapStateToProps = (state) => ({posts:state.postReducers.posts});
+const mapStateToProps = (state) => ({
+	posts:state.getPosts.posts,
+});
 
 
 function mapDispatchToProps(dispatch) {
-  return {
-    getAll: () => dispatch(loadPosts()),
-  }
+	return {
+		getAll: () => dispatch(loadPosts()),
+	}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AllPosts);

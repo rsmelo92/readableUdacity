@@ -4,15 +4,8 @@ import { Route } from 'react-router-dom';
 import '../App.css';
 import Header from './header';
 import AllPosts from './allPosts';
-import { connect } from 'react-redux';
-import { loadPosts } from '../actions/posts';
-
 
 class App extends Component {
-    componentDidMount(){
-        // console.log(this.props.getAll())
-    }
-
     render() {
         return (
             <MuiThemeProvider>
@@ -45,14 +38,4 @@ class App extends Component {
     }
 }
 
-const mapStateToProps = (state) => (state);
-
-
-function mapDispatchToProps(dispatch) {
-  return {
-    getAll: () => dispatch(loadPosts()),
-  }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

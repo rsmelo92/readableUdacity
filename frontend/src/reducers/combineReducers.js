@@ -2,7 +2,8 @@ import { combineReducers } from 'redux';
 import postReducers from './postReducers';
 
 const RootReducer = combineReducers({
-	postReducers
+	getPosts: 		postReducers.getPosts,
+	voteReducer: 	postReducers.voteReducer
 });
 
 export default RootReducer;
