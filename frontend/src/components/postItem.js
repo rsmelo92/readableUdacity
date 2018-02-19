@@ -3,18 +3,16 @@ import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
 import { connect } from 'react-redux';
-import { votePost } from '../actions/posts';
+import { votePost, loadPosts } from '../actions/posts';
 
 class PostItem extends Component{	
-	componentDidMount(){
-	}
 	handleVote = (id, type)=>{
 		this.props.votePost(id, type);
-		console.log('props', this.props);
-
+		window.location.reload();
 	}
 	render(){
-		const post = this.props.post;
+		const post = this.props.newPost.id && (this.props.newPost.id === this.props.post.id) ? this.props.newPost : this.props.post;
+
 		return (
 			<Card className="post-card">
 			
@@ -61,11 +59,14 @@ class PostItem extends Component{
 	}
 }
 
-const mapStateToProps = (state) => (state);
+const mapStateToProps = (state) => ({
+	newPost:state.voteReducer
+});
 
 function mapDispatchToProps(dispatch) {
 	return {
 		votePost: (id, option) => dispatch(votePost(id, option)),
+		getAll: () => dispatch(loadPosts()),
 	}
 }
 

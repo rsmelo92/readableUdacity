@@ -12,6 +12,26 @@ export function loadPosts() {
     }
 }
 
+export function loadCategories() {
+    return function (dispatch) {
+        api.getCategories()
+            .then(response  => {
+               dispatch(getCategories(response))
+            })
+            .catch(err=>dispatch(showError(err)))
+    }
+}
+
+export function loadPostsCategory() {
+    return function (dispatch) {
+        api.getPostsCategories()
+            .then(response  => {
+               dispatch(getPostsCategories(response))
+            })
+            .catch(err=>dispatch(showError(err)))
+    }
+}
+
 export function votePost(id, option) {
     return function (dispatch) {
         api.vote(id, option).then(res => {
@@ -25,6 +45,20 @@ export function votePost(id, option) {
 export function getPosts(posts) {
     return {
         type: 'GET_ALL',
+        payload: posts
+    }
+}
+
+export function getCategories(posts) {
+    return {
+        type: 'GET_CATEGORIES',
+        payload: posts
+    }
+}
+
+export function getPostsCategories(posts) {
+    return {
+        type: 'GET_POSTS_CATEGORIES',
         payload: posts
     }
 }

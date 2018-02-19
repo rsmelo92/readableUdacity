@@ -1,4 +1,3 @@
-import store from '../store';
 
 const getPosts = (state={}, action)=>{
     switch (action.type){
@@ -10,23 +9,23 @@ const getPosts = (state={}, action)=>{
     }
 }
 
+const getCategories = (state={}, action)=>{
+    switch (action.type){
+        case 'GET_CATEGORIES':
+            state = {...state, categories:action.payload}
+            return state;
+        default:
+            return state;
+    }
+}
+
 const voteReducer = (state={}, action) =>{
 	switch (action.type){
 		case 'VOTE_UP':
-			state = store.getState().getPosts.posts.map(item=>{
-				if (item.id === action.payload.id) {
-					return action.payload;
-				}
-				return item;
-			});
+			state = {...state, posts:action.payload}; 
 			return state;
 		case 'VOTE_DOWN':
-			state = store.getState().getPosts.posts.map(item=>{
-				if (item.id === action.payload.id) {
-					return action.payload;
-				}
-				return item;
-			});
+			state = {...state, posts:action.payload}; 
 			return state;
 		default:
 			return state;
@@ -35,5 +34,6 @@ const voteReducer = (state={}, action) =>{
 
 export default {
 					getPosts,
+					getCategories,
 					voteReducer
 				};
