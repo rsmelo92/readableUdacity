@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import PostItem from './postItem';
 import { connect } from 'react-redux';
 import { loadPosts, loadCategories, loadPostsCategory } from '../actions/posts';
@@ -6,18 +7,25 @@ import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
 
 class AllPosts extends Component{
 	componentDidMount(){
-		this.props.getAll();
 		this.props.getCategories();
 	}
-	handleCategoryClick(category){
-		this.props.getPostsCategory(category);
+	componentWillReceiveProps(newProps){
+		const category = this.props.location.pathname.split('/')[1],
+			  newCat   = newProps.location.pathname.split('/')[1];
+		console.log("this.props", newCat)
+		console.log("category", category)
+		if (category !== newCat) {
+			this.props.getPostsCategory(category);	
+		}
+		else{
+			this.props.getAll();	
+		}
 	}
 	render(){
-        const posts = this.props.posts ? this.props.posts : [];
+        const posts 	 = this.props.posts ? this.props.posts : [];
         const categories = this.props.categories ? this.props.categories.categories : [];
-        console.log("props", this.props)
 		return (
-			<div>
+			<div className="posts-holder">
 				<div>
 					<Toolbar>
 						<ToolbarGroup firstChild={true}>
@@ -25,12 +33,13 @@ class AllPosts extends Component{
 						</ToolbarGroup>
 
 						<ToolbarGroup>
+
+                        	<Link to="/">All /</Link>
+							
 							{categories.map((item, index)=>(
-								<span key={item.name + index}>
-									<a key={item.path} onClick={()=>{this.handleCategoryClick(item.path)}}> {item.path} </a>
-									<span key={index}> / </span>
-								</span>
-							))}						
+                       			<Link key={index} to={`/${ item.path }`}> {item.name} /</Link>
+							))}		
+
 						</ToolbarGroup>
 
 					</Toolbar>
@@ -58,7 +67,7 @@ function mapDispatchToProps(dispatch) {
 	return {
 		getAll: () => dispatch(loadPosts()),
 		getCategories: () => dispatch(loadCategories()),
-		getPostsCategory: () => dispatch(loadPostsCategory()),
+		getPostsCategory: (category) => dispatch(loadPostsCategory(category)),
 	}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AllPosts);

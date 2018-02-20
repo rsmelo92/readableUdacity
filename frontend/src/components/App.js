@@ -13,11 +13,10 @@ class App extends Component {
                     
                     <Header/>
                     
-                    <Route exact path="/" render={() => (
-                        <section className="posts-holder">
-                            <AllPosts></AllPosts>
-                        </section>
-                    )} />
+                    <Route exact path="/" component={AllPosts} />
+
+                    <Route exact path="/:category" component={AllPosts} />
+
                     
                     <Route exact path="/detail" render={() => (
                         <section className="post-detail">

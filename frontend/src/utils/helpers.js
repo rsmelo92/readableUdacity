@@ -10,6 +10,7 @@ const getCategories = (id, option) => {
 }
 
 const getPostsCategories = (category)=>{
+	console.log("category", category)
 	return Axios.get(url + '/' + category + '/posts', { headers }).then(res => res.data );
 }
 

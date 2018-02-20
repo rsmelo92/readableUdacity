@@ -22,9 +22,9 @@ export function loadCategories() {
     }
 }
 
-export function loadPostsCategory() {
+export function loadPostsCategory(category) {
     return function (dispatch) {
-        api.getPostsCategories()
+        api.getPostsCategories(category)
             .then(response  => {
                dispatch(getPostsCategories(response))
             })
