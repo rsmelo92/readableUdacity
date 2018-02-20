@@ -7,18 +7,20 @@ import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
 
 class AllPosts extends Component{
 	componentDidMount(){
+		const category = this.props.location.pathname.split('/')[1];
+		if (category) {
+			this.props.getPostsCategory(category);	
+		}
+		else{
+			this.props.getAll();	
+		}
 		this.props.getCategories();
 	}
 	componentWillReceiveProps(newProps){
 		const category = this.props.location.pathname.split('/')[1],
 			  newCat   = newProps.location.pathname.split('/')[1];
-		console.log("this.props", newCat)
-		console.log("category", category)
 		if (category !== newCat) {
-			this.props.getPostsCategory(category);	
-		}
-		else{
-			this.props.getAll();	
+			window.location.reload();
 		}
 	}
 	render(){

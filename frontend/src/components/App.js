@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 import '../App.css';
 import Header from './header';
 import AllPosts from './allPosts';
+import AddPost from './addPost';
 
 class App extends Component {
     render() {
@@ -25,9 +26,7 @@ class App extends Component {
                     )} />
                     
                     <Route exact path="/add-post" render={() => (
-                        <section className="post-add">
-                            <h1>Add</h1>
-                        </section>
+                        <AddPost />
                     )} />
 
 
