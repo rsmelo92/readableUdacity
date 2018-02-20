@@ -32,6 +32,16 @@ export function loadPostsCategory(category) {
     }
 }
 
+export function addPostToServer(post) {
+    return function (dispatch) {
+        api.addPostToServer(post)
+            .then(response => {
+                dispatch(addPost(response))
+            })
+            .catch(err=>dispatch(showError(err)));
+    }
+}
+
 export function votePost(id, option) {
     return function (dispatch) {
         api.vote(id, option).then(res => {
@@ -60,6 +70,13 @@ export function getPostsCategories(posts) {
     return {
         type: 'GET_POSTS_CATEGORIES',
         payload: posts
+    }
+}
+
+export function addPost(post) {
+    return {
+        type: 'ADD_POST',
+        payload: post
     }
 }
 

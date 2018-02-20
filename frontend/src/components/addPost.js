@@ -3,12 +3,16 @@ import TextField from 'material-ui/TextField';
 import serializeForm from 'form-serialize';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import { connect } from 'react-redux';
+import { addPostToServer } from '../actions/posts';
 
 class AddPost extends Component{
 	handleSubmit = (e)=>{
 		e.preventDefault();
 		const values = serializeForm(e.target,{hash:true});
+		values['category'] = this.state.value;
 		console.log("valies", values)
+		this.props.insertPost(values);
 	}
 	state = {
 		value: 1,
@@ -54,4 +58,12 @@ class AddPost extends Component{
 	}
 }
 
-export default AddPost;
+const mapStateToProps = (state) => (state);
+
+
+function mapDispatchToProps(dispatch) {
+	return {
+		insertPost: (post) => dispatch(addPostToServer(post)),
+	}
+}
+export default connect(mapStateToProps, mapDispatchToProps)(AddPost);

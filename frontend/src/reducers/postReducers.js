@@ -7,6 +7,9 @@ const getPosts = (state={}, action)=>{
         case 'GET_POSTS_CATEGORIES':
             state = {...state, posts:action.payload}
             return state;
+        case 'ADD_POST':
+            state = {...state, posts:action.payload}
+            return state;
         default:
             return state;
     }

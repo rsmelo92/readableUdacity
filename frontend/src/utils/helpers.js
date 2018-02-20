@@ -14,6 +14,11 @@ const getPostsCategories = (category)=>{
 	return Axios.get(url + '/' + category + '/posts', { headers }).then(res => res.data );
 }
 
+const addPostToServer = (post) =>{
+	console.log("Post server", post);
+    return Axios.post(url + '/posts/', { post }, { headers }).then(res => res.data);
+}
+
 const vote = (id, option) => {
     return Axios.post(url + '/posts/' + id, { option: `${option}` }, { headers }).then(res => res.data);
 }
@@ -22,5 +27,6 @@ export const api = {
 	getAllPosts,
 	getCategories,
 	getPostsCategories,
+	addPostToServer,
 	vote
 };
