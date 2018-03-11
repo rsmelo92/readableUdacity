@@ -16,7 +16,7 @@ const getPostsCategories = (category)=>{
 
 const addPostToServer = (post) =>{
 	console.log("Post server", post);
-    return Axios.post(url + '/posts/', { post }, { headers }).then(res => res.data);
+    return Axios.post(url + '/posts/', post, { headers }).then(res => res.data);
 }
 
 const vote = (id, option) => {

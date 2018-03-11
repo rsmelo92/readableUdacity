@@ -13,6 +13,8 @@ class AddPost extends Component{
 		values['category'] = this.state.value;
 		console.log("valies", values)
 		this.props.insertPost(values);
+		alert("Post Inserted with success!");
+		window.location.assign("/");
 	}
 	state = {
 		value: 1,
@@ -58,7 +60,9 @@ class AddPost extends Component{
 	}
 }
 
-const mapStateToProps = (state) => (state);
+const mapStateToProps = (state) => ({
+	newPost:state.newPost
+});
 
 
 function mapDispatchToProps(dispatch) {
